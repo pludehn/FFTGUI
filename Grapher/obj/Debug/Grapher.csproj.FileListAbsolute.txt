@@ -1,12 +1,12 @@
+C:\Users\laptop\source\repos\Grapher\Grapher\bin\Debug\Grapher.exe.config
+C:\Users\laptop\source\repos\Grapher\Grapher\bin\Debug\Grapher.exe
+C:\Users\laptop\source\repos\Grapher\Grapher\bin\Debug\Grapher.pdb
 C:\Users\laptop\source\repos\Grapher\Grapher\obj\Debug\Grapher.csprojAssemblyReference.cache
 C:\Users\laptop\source\repos\Grapher\Grapher\obj\Debug\MainWindow.g.cs
 C:\Users\laptop\source\repos\Grapher\Grapher\obj\Debug\UserControl.g.cs
 C:\Users\laptop\source\repos\Grapher\Grapher\obj\Debug\App.g.cs
 C:\Users\laptop\source\repos\Grapher\Grapher\obj\Debug\Grapher_MarkupCompile.cache
 C:\Users\laptop\source\repos\Grapher\Grapher\obj\Debug\Grapher_MarkupCompile.lref
-C:\Users\laptop\source\repos\Grapher\Grapher\bin\Debug\Grapher.exe.config
-C:\Users\laptop\source\repos\Grapher\Grapher\bin\Debug\Grapher.exe
-C:\Users\laptop\source\repos\Grapher\Grapher\bin\Debug\Grapher.pdb
 C:\Users\laptop\source\repos\Grapher\Grapher\obj\Debug\MainWindow.baml
 C:\Users\laptop\source\repos\Grapher\Grapher\obj\Debug\UserControl.baml
 C:\Users\laptop\source\repos\Grapher\Grapher\obj\Debug\Grapher.g.resources

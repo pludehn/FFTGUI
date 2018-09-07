@@ -20,32 +20,34 @@ namespace Grapher
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    
     public partial class MainWindow : Window
     {
         private Point currentPoint = new Point();
-        MouseButtonEventHandler paintSurface;
-      //  RoutedEventHandler RoutedEvnt;
+        private Point PointCoord = new Point();
+        private TextBox coord = new TextBox();
+        private TextBox coordbr = new TextBox();
         public MainWindow()
         {
             InitializeComponent();
-
-
-          //  Main = new Canvas();
-            //Main.Loaded += new RoutedEventHandler(Draw_Graphics);
+          //  Main.Loaded += new RoutedEventHandler(Draw_Graphics);
         }
-        private void Draw_Graphics(object sender, RoutedEventArgs e)
+        Point GetMousePos()
         {
-            const double margin = 30;
+            return Main.PointToScreen(Mouse.GetPosition(Main));
+        }
+        private void Canvas_MouseDown_1(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            if (e.ButtonState == MouseButtonState.Pressed)
+                currentPoint = e.GetPosition(this);           
+        }
+      private void Draw_Graphics(object sender, RoutedEventArgs e)
+        {
+            const double margin = 10;
             double xmin = margin;
-            // PropertyMetadata pmXMAX = Grapher.MainWindow.WidthProperty.DefaultMetadata;
-            // (double)pmXMAX.DefaultValue;
             double xmax = Main.Width - margin;
             double ymin = margin;
-            //PropertyMetadata pmYMAX = Grapher.MainWindow.WidthProperty.DefaultMetadata;
-            //double ymax = (double)pmYMAX.DefaultValue;
             double ymax = Main.Height - margin;
-            const double step = 20;
+            const double step = 10;
             //X-Axis
             GeometryGroup xaxis_geom = new GeometryGroup();
             xaxis_geom.Children.Add(new LineGeometry(new Point(0, ymax), new Point(Main.Width, ymax)));
@@ -53,12 +55,11 @@ namespace Grapher
             {
                 xaxis_geom.Children.Add(new LineGeometry(new Point(x, ymax - margin / 2), new Point(x, ymax + margin / 2)));
             }
-            Path xaxis_path = new Path
-            {
-                StrokeThickness = 25,
-                Stroke = Brushes.Black,
-                Data = xaxis_geom
-            };
+            Path xaxis_path = new Path();
+            xaxis_path.StrokeThickness = 1;
+            xaxis_path.Stroke = Brushes.Black;
+            xaxis_path.Data = xaxis_geom;
+            
             Main.Children.Add(xaxis_path);
 
             //Y-Axis
@@ -68,21 +69,39 @@ namespace Grapher
             {
                 yaxis_geom.Children.Add(new LineGeometry(new Point(xmin - margin / 2, y), new Point(xmin + margin / 2, y)));
             }
-            Path yaxis_path = new Path
-            {
-                StrokeThickness = 25,
-                Stroke = Brushes.Black,
-                Data = yaxis_geom
-            };
+            Path yaxis_path = new Path();
+            yaxis_path.StrokeThickness = 1;
+            yaxis_path.Stroke = Brushes.Black;
+            yaxis_path.Data = yaxis_geom;
             Main.Children.Add(yaxis_path);
-        }
-        private void Canvas_MouseDown_1(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            if (e.ButtonState == MouseButtonState.Pressed)
-                currentPoint = e.GetPosition(this);
+            Brush[] brushes = { Brushes.Red, Brushes.Green, Brushes.Blue };
+            Random rand = new Random();
+            for (int data_set = 0; data_set < 3; data_set++)
+            {
+                int last_y = rand.Next((int)ymin, (int)ymax);
+
+                PointCollection points = new PointCollection();
+                for (double x = xmin; x <= xmax; x += step)
+                {
+                    last_y = rand.Next(last_y - 10, last_y + 10);
+                    if (last_y < ymin) last_y = (int)ymin;
+                    if (last_y > ymax) last_y = (int)ymax;
+                    points.Add(new Point(x, last_y));
+                }
+                Polyline polyline = new Polyline();
+                polyline.StrokeThickness = 1;
+                polyline.Stroke = brushes[data_set];
+                polyline.Points = points;
+
+                Main.Children.Add(polyline);
+            }
         }
         private void Canvas_MouseMove_1(object sender,MouseEventArgs e)
         {
+            Main.Children.Remove(coordbr);
+            PointCoord = GetMousePos();
+            coordbr.Text = PointCoord.ToString();
+            Main.Children.Add(coordbr);
             if (e.LeftButton == MouseButtonState.Pressed)
             {
                 Line line = new Line();
@@ -93,8 +112,9 @@ namespace Grapher
                 line.Y2 = e.GetPosition(this).Y;
                 currentPoint = e.GetPosition(this);
                 Main.Children.Add(line);
-            }
+            }         
         }
+
     }
 }
 
@@ -157,42 +177,6 @@ public class SineWave:Window
         }
         return arr;
     }
-    private void Draw_Graphics(object sender, RoutedEventArgs e)
-    {
-        const double margin = 10;
-        double xmin = margin;
-        PropertyMetadata pmXMAX = Grapher.MainWindow.WidthProperty.DefaultMetadata;
-        double xmax = (double)pmXMAX.DefaultValue;
-        double ymin = margin;
-        PropertyMetadata pmYMAX = Grapher.MainWindow.WidthProperty.DefaultMetadata;
-        double ymax = (double)pmYMAX.DefaultValue;
-        const double step = 10;
 
-        //X-Axis
-        GeometryGroup xaxis_geom = new GeometryGroup();
-        xaxis_geom.Children.Add(new LineGeometry(new Point(0, ymax), new Point(Width, ymax)));
-        for (double x = xmin + step; x <= Width - step; x += step)
-        {
-            xaxis_geom.Children.Add(new LineGeometry(new Point(x, ymax - margin / 2), new Point(x, ymax + margin / 2)));
-        }
-        Path xaxis_path = new Path();
-        xaxis_path.StrokeThickness = 1;
-        xaxis_path.Stroke = Brushes.Black;
-        xaxis_path.Data = xaxis_geom;
-        AddChild(xaxis_path);
-
-        //Y-Axis
-        GeometryGroup yaxis_geom = new GeometryGroup();
-        yaxis_geom.Children.Add(new LineGeometry(new Point(xmin, 0), new Point(xmin, Height)));
-        for (double y = step; y <= Height - step; y += step)
-        {
-            yaxis_geom.Children.Add(new LineGeometry(new Point(xmin - margin / 2, y), new Point(xmin + margin / 2, y)));
-        }
-        Path yaxis_path = new Path();
-        yaxis_path.StrokeThickness = 1;
-        yaxis_path.Stroke = Brushes.Black;
-        yaxis_path.Data = yaxis_geom;
-        AddChild(yaxis_path);
-    }
 }
 */

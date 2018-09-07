@@ -6,9 +6,7 @@
         xmlns:local="clr-namespace:Grapher"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800" Background="Black">
-	<Canvas Name="Main" Background="White" Loaded="Draw_Graphics" MouseDown="Canvas_MouseDown_1" MouseMove="Canvas_MouseMove_1">
-		<Canvas HorizontalAlignment="Left" Height="393" Margin="10,10,0,0" VerticalAlignment="Top" Width="762"/>
-	</Canvas>
-
-</Window>
-	
+	<Viewbox Name="View" HorizontalAlignment="Left" Height="440" VerticalAlignment="Top" Width="790" Margin="0,0,0,-20" Stretch="Fill" StretchDirection="Both">
+		<Canvas Name="Main" Background="White" HorizontalAlignment="Left" Height="426" VerticalAlignment="Top" Width="802" MouseLeftButtonDown="Canvas_MouseDown_1" Loaded="Draw_Graphics" MouseMove="Canvas_MouseMove_1"/>
+	</Viewbox>
+</Window>	
