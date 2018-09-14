@@ -1,0 +1,75 @@
+using System.Collections.Generic;
+using System.Linq;
+using System.IO;
+using System.Numerics;
+using System;
+
+
+public class Example
+{
+    public static void Main()
+    {
+        Signal sig = new Signal();
+        for (int i = 0; i < 32; i++)
+        {
+            sig.input.Add(i);
+        }
+
+        sig.Sort();
+        sig.print();
+
+    }
+}
+//32/64/128/256/512/1024/2048/4096/8192/16384/32768
+public class Signal
+{
+    private int FFTBinSize { get; set; } //Set by user control.
+    public List<double> input = new List<double>();
+    private List<double> inputT { get; set; }
+    private List<double> FreqDomR = new List<double>();
+    private List<double> FreqDomI = new List<double>();
+
+    public void Sort()
+    {
+        int k = 32; // k = fftbinsize
+        inputT = new List<double>(new double[k]);
+        int stages = (int)System.Math.Log(k, 2);
+        //Rearrange time domain into another List, then at each index, sort then later seperate into Real and Imaginary components for frequency domain synthesis.
+        for (int j = 1; j < 2*stages; j *=2)
+        {
+            for (int i = 0; i <(k / (2 * j)); i++)
+            {
+                //Console.WriteLine("input.ElementAt(2*i):{0}, index: {1}, j: {2}", input.ElementAt(2 * i), i, j);
+                inputT[i] = input.ElementAt(2 * i);
+                //Console.WriteLine("input.ElementAt((2*i) +1):{0}, index: {1}, j: {2}", input.ElementAt(2 * i) + 1, (k / (2 * j)) + i, j);
+                inputT[(k / (2 * j)) + i] = input.ElementAt((2 * i) + 1);
+                if (j>=2)
+                {
+                    inputT[(k / 2) + i] = input.ElementAt((2 * i) + (k / 2));
+                    inputT[(k / 2) + (k / (2 * j)) + i] = input.ElementAt(((2 * i) + 1) + (k / 2));
+                    if (j>=4)
+                    {
+                        inputT[((k / 2) - 1) - (k / (2 * j)) + i] = input.ElementAt((k / 2) - (k / (2 * j)) - i);
+                        inputT[((k - 1) - (k / (2 * j))) + i] = input.ElementAt(k - (k / (2 * j)) - i);
+                    }
+                }
+            }
+            input.Clear();
+            input = inputT.ToList();
+        }
+    }
+    public void print()
+    {
+        for (int i = 0; i < inputT.Count; i++)
+        {
+            Console.WriteLine("InputT:{0} at Index: {1}", inputT.ElementAt(i),i);
+        }
+    }
+    public void InitializeN()
+    {
+        FreqDomI.Capacity = inputT.Count;
+        FreqDomI.Capacity = inputT.Count;
+    }
+    
+
+}

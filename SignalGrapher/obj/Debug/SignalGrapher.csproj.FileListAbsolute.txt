@@ -1,0 +1,15 @@
+C:\Users\laptop\source\repos\SignalGrapher\SignalGrapher\bin\Debug\SignalGrapher.exe.config
+C:\Users\laptop\source\repos\SignalGrapher\SignalGrapher\bin\Debug\SignalGrapher.exe
+C:\Users\laptop\source\repos\SignalGrapher\SignalGrapher\bin\Debug\SignalGrapher.pdb
+C:\Users\laptop\source\repos\SignalGrapher\SignalGrapher\obj\Debug\SignalGrapher.csprojAssemblyReference.cache
+C:\Users\laptop\source\repos\SignalGrapher\SignalGrapher\obj\Debug\MainWindow.g.cs
+C:\Users\laptop\source\repos\SignalGrapher\SignalGrapher\obj\Debug\App.g.cs
+C:\Users\laptop\source\repos\SignalGrapher\SignalGrapher\obj\Debug\SignalGrapher_MarkupCompile.cache
+C:\Users\laptop\source\repos\SignalGrapher\SignalGrapher\obj\Debug\SignalGrapher_MarkupCompile.lref
+C:\Users\laptop\source\repos\SignalGrapher\SignalGrapher\obj\Debug\MainWindow.baml
+C:\Users\laptop\source\repos\SignalGrapher\SignalGrapher\obj\Debug\SignalGrapher.g.resources
+C:\Users\laptop\source\repos\SignalGrapher\SignalGrapher\obj\Debug\SignalGrapher.Properties.Resources.resources
+C:\Users\laptop\source\repos\SignalGrapher\SignalGrapher\obj\Debug\SignalGrapher.csproj.GenerateResource.cache
+C:\Users\laptop\source\repos\SignalGrapher\SignalGrapher\obj\Debug\SignalGrapher.csproj.CoreCompileInputs.cache
+C:\Users\laptop\source\repos\SignalGrapher\SignalGrapher\obj\Debug\SignalGrapher.exe
+C:\Users\laptop\source\repos\SignalGrapher\SignalGrapher\obj\Debug\SignalGrapher.pdb
